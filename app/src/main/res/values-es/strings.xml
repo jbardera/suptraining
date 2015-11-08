@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Suptraining</string>
+    <string name="element1">Flexiones</string>
+    <string name="element2">Abdominales</string>
+    <string name="element3">Sentadillas</string>
+</resources>
