@@ -39,7 +39,6 @@ public class Start extends AppCompatActivity
     private final int NUM_TABS=4;
     private String[] TABS;
     private int[] imageResId;
-    private Time now = new Time(Time.getCurrentTimezone());
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -88,7 +87,7 @@ public class Start extends AppCompatActivity
         Constants.listElementsData.put(2,new ElementsData(getString(R.string.units),100));
         Constants.table.add(new Element(getString(R.string.element3),3));
         Constants.listElementsData.put(3, new ElementsData(getString(R.string.units), 120));
-        Constants.session=new Session(getString(R.string.string2), now.format2445(),Constants.table);
+        Constants.session=new Session(getString(R.string.string2),Constants.table);
         //reading custom elements
     }
 
@@ -141,7 +140,7 @@ public class Start extends AppCompatActivity
                 case 0: // Fragment #0
                     return StartF.init(position);
                 case 1: // Fragment #1
-                    return PlaceholderFragment.newInstance(position + 1);
+                    return SessionsListF.init(position);
                 //return SavedF.init(position);
                 case 2: // Fragment #2
                     return PlaceholderFragment.newInstance(position + 1);

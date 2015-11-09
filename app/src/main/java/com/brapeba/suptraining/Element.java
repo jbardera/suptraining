@@ -1,9 +1,11 @@
 package com.brapeba.suptraining;
 
+import java.io.Serializable;
+
 /**
  * Created by joanmi on 05-Nov-15.
  */
-public class Element
+public class Element implements Serializable
 {
     private String name;
     private int code;
