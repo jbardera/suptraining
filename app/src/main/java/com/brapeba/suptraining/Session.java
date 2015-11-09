@@ -12,14 +12,12 @@ public class Session implements Serializable
     private String name;
     private Date date;
     private List<Element> listElement;
-    private Boolean toBeDeleted;
 
     public Session(String s1,List<Element> le1)
     {
         this.name=s1;
         this.date=new Date();
         this.listElement=le1;
-        this.toBeDeleted=false;
     }
 
     public void setElement(List<Element> e1)
@@ -30,13 +28,8 @@ public class Session implements Serializable
     {
         this.name=s1;
     }
-    public void setToBeDeleted(Boolean b1)
-    {
-        this.toBeDeleted=b1;
-    }
 
     public String getName() { return this.name; }
     public Date  getDate() { return this.date; }
     public List<Element> getElements() { return this.listElement; }
-    public Boolean getToBeDeleted() { return this.toBeDeleted; }
 }

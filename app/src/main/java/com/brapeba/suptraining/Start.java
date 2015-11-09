@@ -5,6 +5,7 @@ licensed under CC-BY see http://creativecommons.org/licenses/by/4.0/
 
 package com.brapeba.suptraining;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class Start extends AppCompatActivity
 {
@@ -56,8 +59,9 @@ public class Start extends AppCompatActivity
 
         if(savedInstanceState==null)
         {
-            // ... was not rotated -> initializing vars
-            initVars();
+            // ... was not rotated -> initializing vars (new Session)
+            Activity myActivity=this;
+            newSession(this);
         }
 
         // Create the adapter that will return a fragment for each of the three
@@ -78,19 +82,6 @@ public class Start extends AppCompatActivity
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
     }
-
-    private void initVars()
-    {
-        Constants.table.add(new Element(getString(R.string.element1),1));
-        Constants.listElementsData.put(1,new ElementsData(getString(R.string.units),50));
-        Constants.table.add(new Element(getString(R.string.element2),2));
-        Constants.listElementsData.put(2,new ElementsData(getString(R.string.units),100));
-        Constants.table.add(new Element(getString(R.string.element3),3));
-        Constants.listElementsData.put(3, new ElementsData(getString(R.string.units), 120));
-        Constants.session=new Session(getString(R.string.string2),Constants.table);
-        //reading custom elements
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -214,5 +205,18 @@ public class Start extends AppCompatActivity
     @Override public void onDestroy()
     {
         super.onDestroy();
+    }
+
+    static public void newSession(Activity activity)
+    {
+        Constants.table=new ArrayList<Element>();
+        Constants.table.add(new Element(activity.getString(R.string.element1), 1));
+        Constants.listElementsData.put(1, new ElementsData(activity.getString(R.string.units), 50));
+        Constants.table.add(new Element(activity.getString(R.string.element2), 2));
+        Constants.listElementsData.put(2, new ElementsData(activity.getString(R.string.units), 100));
+        Constants.table.add(new Element(activity.getString(R.string.element3), 3));
+        Constants.listElementsData.put(3, new ElementsData(activity.getString(R.string.units), 120));
+        Constants.session = new Session(activity.getString(R.string.string2), Constants.table);
+        //reading custom elements
     }
 }

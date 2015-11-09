@@ -110,8 +110,8 @@ public class SessionsListF extends Fragment
                     {
                         if (checked.valueAt(i))
                         {
-                            undoDel.add(Constants.allSessions.get(checked.keyAt(i)));
-                            Constants.allSessions.remove(checked.keyAt(i));
+                            undoDel.add(Constants.allSessions.get(checked.keyAt(i-dSize))); //i-dSize because index reduces by deletions as i increases
+                            Constants.allSessions.remove(checked.keyAt(i-dSize));
                             dSize++;
                         }
                     }

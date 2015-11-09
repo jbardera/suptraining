@@ -15,9 +15,10 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="undo">Undo</string>
-    <string name="saving">Saving...</string>
+    <string name="saving">Saving</string>
+    <string name="session">Session</string>
     <string name="string1">Enter value</string>
     <string name="string2">NEW SESSION</string>
     <string name="string3">Session name</string>
-    <string name="string4">sessions deleted...</string>
+    <string name="string4">session(s) deleted...</string>
 </resources>
