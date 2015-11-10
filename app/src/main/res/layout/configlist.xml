@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
+                xmlns:toggle="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -11,42 +12,42 @@
         android:paddingLeft="@dimen/buttons_margin"
         android:paddingRight="@dimen/buttons_margin"
         android:singleLine="true">
-        <TextView
+        <EditText
             android:id="@+id/lcname"
-            android:layout_weight=".49"
+            android:layout_weight=".50"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            style="@android:style/TextAppearance.Medium"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <EditText
+            android:id="@+id/lcunits"
+            android:layout_weight=".15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            style="@android:style/TextAppearance.Medium"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <EditText
+            android:id="@+id/lcinc"
+            android:layout_weight=".15"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:singleLine="true"
             style="@android:style/TextAppearance.Medium"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <ToggleButton
+        <com.brapeba.suptraining.ToggleButton
             android:id="@+id/tb1"
-            android:layout_weight=".17"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_button"
-            style="@android:style/TextAppearance.Medium"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Show"/>
-
-        <Button
-            android:id="@+id/lcb1"
-            android:layout_weight=".17"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_button"
-            style="@android:style/TextAppearance.Medium"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="\?"/>
-        <Button
-            android:id="@+id/lcb2"
-            android:layout_weight=".17"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_button"
-            style="@android:style/TextAppearance.Medium"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="+"/>
+            android:layout_width="54dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            toggle:onColor="@color/colorAccent"
+            toggle:offBorderColor="@color/colorPrimary"
+            toggle:offColor="@color/colorPrimary"
+            toggle:spotColor="@color/colorPrimaryDark"
+            toggle:borderWidth="2dp"
+            android:clickable="true">
+        </com.brapeba.suptraining.ToggleButton>
     </LinearLayout>
 </RelativeLayout>

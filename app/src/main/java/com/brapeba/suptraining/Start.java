@@ -210,8 +210,8 @@ public class Start extends AppCompatActivity
     static public void newSession(Activity activity)
     {
         Constants.table=new ArrayList<Element>();
-        Constants.table.add(new Element(activity.getString(R.string.element1), 1));
-        Constants.listElementsData.put(1, new ElementsData(activity.getString(R.string.units), 50));
+        Constants.table.add(new Element(activity.getString(R.string.element1), 1)); //"1"=code for this new element
+        Constants.listElementsData.put(1, new ElementsData(activity.getString(R.string.units), 50)); //setting "1" as code to match the element added above
         Constants.table.add(new Element(activity.getString(R.string.element2), 2));
         Constants.listElementsData.put(2, new ElementsData(activity.getString(R.string.units), 100));
         Constants.table.add(new Element(activity.getString(R.string.element3), 3));

@@ -10,9 +10,11 @@ package com.brapeba.suptraining;
  */
 
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -32,6 +34,7 @@ public class ConfigElementCustomAdapter extends BaseAdapter
     public List<Element> data;
     private LayoutInflater mInflater = null;
     private MyCustomRowButtonListener2 mRowButtonListener;
+    private ElementsData tempElementData;
 
     public ConfigElementCustomAdapter(Context context, List<Element> counts, MyCustomRowButtonListener2 listener)
     {
@@ -44,9 +47,8 @@ public class ConfigElementCustomAdapter extends BaseAdapter
 
     static class ViewHolder
     {
-        TextView name;
-        ToggleButton tb1;
-        Button lcb1;
+        TextView name,units,increment;
+        com.brapeba.suptraining.ToggleButton tb1;
     }
 
 
@@ -59,8 +61,9 @@ public class ConfigElementCustomAdapter extends BaseAdapter
             convertView = mInflater.inflate(R.layout.configlist, null);
             holder = new ViewHolder();
             holder.name = (TextView) convertView.findViewById(R.id.lcname);
-            holder.tb1 = (ToggleButton) convertView.findViewById(R.id.tb1);
-            holder.lcb1 = (Button) convertView.findViewById(R.id.lcb1);
+            holder.units = (TextView) convertView.findViewById(R.id.lcunits);
+            holder.increment = (TextView) convertView.findViewById(R.id.lcinc);
+            holder.tb1 = (com.brapeba.suptraining.ToggleButton) convertView.findViewById(R.id.tb1);
             convertView.setTag(holder);
         } else
         {
@@ -68,14 +71,19 @@ public class ConfigElementCustomAdapter extends BaseAdapter
         }
 
         holder.name.setText(getItem(position).getName());
+        tempElementData=Constants.listElementsData.get(data.get(position).getCode()); //getting value of toShow for this element
+        if (tempElementData.getToShow()) holder.tb1.toggleOn(); else holder.tb1.toggleOff(); //displaying the togglebutton accordingly
+        holder.units.setText(tempElementData.getUnit());
+        holder.increment.setText(Integer.toString(tempElementData.getInc()));
+
         final ViewHolder holdertemp=holder;
-        holder.lcb1.setOnClickListener(new View.OnClickListener()
+        final com.brapeba.suptraining.ToggleButton temptb1 = holder.tb1;
+        holder.tb1.setOnClickListener(new View.OnClickListener()
         {
-            @Override
             public void onClick(View v)
             {
-                mRowButtonListener.onCustomRowButtonClick(getItem(position), position, 0, holdertemp.lcb1);
-
+                temptb1.toggle();
+                //mRowButtonListener.onCustomRowButtonClick(getItem(position), position, 0, holdertemp.???);
             }
         });
 
