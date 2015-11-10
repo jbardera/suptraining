@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context=".Main$PlaceholderFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/buttons_margin"
+        android:paddingRight="@dimen/buttons_margin"
+        android:singleLine="true">
+        <TextView
+            android:id="@+id/lcname"
+            android:layout_weight=".49"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            style="@android:style/TextAppearance.Medium"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ToggleButton
+            android:id="@+id/tb1"
+            android:layout_weight=".17"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
+            style="@android:style/TextAppearance.Medium"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Show"/>
+
+        <Button
+            android:id="@+id/lcb1"
+            android:layout_weight=".17"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
+            style="@android:style/TextAppearance.Medium"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="\?"/>
+        <Button
+            android:id="@+id/lcb2"
+            android:layout_weight=".17"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
+            style="@android:style/TextAppearance.Medium"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="+"/>
+    </LinearLayout>
+</RelativeLayout>

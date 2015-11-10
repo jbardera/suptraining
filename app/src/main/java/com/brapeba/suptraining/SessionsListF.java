@@ -26,7 +26,6 @@ public class SessionsListF extends Fragment
      * The fragment argument representing the section number for this
      * fragment.
      */
-    private static final String ARG_SECTION_NUMBER = "section_number";
     private static List<Session> afterDel= new ArrayList<Session>();
     private static List<Session> undoDel= new ArrayList<Session>();
     private static ListView cListView;
@@ -44,7 +43,7 @@ public class SessionsListF extends Fragment
     {
         SessionsListF fragment = new SessionsListF();
         Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        args.putInt(Constants.ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
     }

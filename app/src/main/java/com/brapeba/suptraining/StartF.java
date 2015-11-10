@@ -27,7 +27,6 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
      * The fragment argument representing the section number for this
      * fragment.
      */
-    private static final String ARG_SECTION_NUMBER = "section_number";
     private static ListView cListView;
     private static LinearLayout linL;
     private static ListElementCustomAdapter adapter;
@@ -42,15 +41,15 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
     {
         StartF fragment = new StartF();
         Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        args.putInt(Constants.ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
     }
 
     public void onCustomRowButtonClick(Element selectedItem, int position, int increment, View view)
     {
+        //listener of custom adapter->to process updates!
         selectedItem.sumTimes(increment);
-        //Toast.makeText(this,"You have selected "+selectedItem, Toast.LENGTH_SHORT).show();
     }
 
     @Override public void onCreate(Bundle savedInstanceState)

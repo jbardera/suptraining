@@ -13,6 +13,7 @@ import java.util.Map;
 public class Constants
 {
     public static final String TAG="SUPTRAINING";
+    public static final String ARG_SECTION_NUMBER = "section_number";
     public static final String MYPREFSOR="myprefsor";
     public static Session session;
     public static List<Element> table; //elements of session shown at Intro fragment
