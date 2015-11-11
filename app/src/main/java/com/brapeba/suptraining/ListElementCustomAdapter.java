@@ -67,7 +67,7 @@ public class ListElementCustomAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.name.setText(getItem(position).getName());
+        holder.name.setText(Constants.listElementsData.get(getItem(position).getCode()).getName());
         holder.button1.setText("+"+Constants.listElementsData.get(getItem(position).getCode()).getInc());
         holder.timesdone.setText(String.valueOf(getItem(position).getTimesdone()));
         final ViewHolder holdertemp=holder;

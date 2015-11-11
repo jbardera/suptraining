@@ -6,7 +6,7 @@
                 tools:context=".Main$PlaceholderFragment">
 
     <LinearLayout
-        android:id="@+id/ctop"
+        android:id="@+id/cftop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

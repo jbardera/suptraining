@@ -7,16 +7,12 @@ package com.brapeba.suptraining;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -29,10 +25,8 @@ import java.security.SecureRandom;
 public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCustomRowButtonListener2
 {
         private static ListView cListView;
-        private static LinearLayout linL;
         private static ConfigElementCustomAdapter adapter;
-        private FloatingActionButton fab;
-        private TextView tempTV;
+        public FloatingActionButton fab;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -47,9 +41,18 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
             return fragment;
         }
 
-        public void onCustomRowButtonClick(Element selectedItem, int position, int increment, View view)
+        public void onCustomRowButtonClick(Element selectedItem, int position, int action, View view)
         {
             //listener of custom adapter->to process updates!
+            switch(action)
+            {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                default:
+                    break;
+            }
         }
 
         @Override public void onCreate(Bundle savedInstanceState)
@@ -62,7 +65,6 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
         {
             View rootView = inflater.inflate(R.layout.start_f, container, false);
             cListView = (ListView) rootView.findViewById(android.R.id.list);
-            linL = (LinearLayout) rootView.findViewById(R.id.lltop);
             cListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
             return rootView;
         }
@@ -71,7 +73,6 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
         public void onViewCreated(View view, Bundle savedInstanceState)
         {
             super.onViewCreated(view, savedInstanceState);
-            tempTV=(TextView)view.findViewById(R.id.stheader);
             adapter = new ConfigElementCustomAdapter(getActivity(),Constants.table,ConfigF.this);
             // cListView.setAdapter(adapter); // NO NEED HERE AS IT IS @OnResume via refreshTab()
             cListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
@@ -81,26 +82,22 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
                 @Override
                 public void onClick(View view)
                 {
+                    /*
                     if (!SaveC.saveToInternalStorage(Constants.session, getActivity()))
                     {
                         // returned false -> handle error
                     }
-                    SessionsListF.refreshTab(getActivity());
                     Snackbar.make(getView(), getString(R.string.saving) + " " + Constants.session.getName(), Snackbar.LENGTH_SHORT).show();
-                    // once the session is saved we create a new one:
-                    Start.newSession(getActivity());
-                    tempTV.setText(getString(R.string.session) + " #" + Constants.session.getName() + " \n" + Constants.session.getDate().toLocaleString());
                     refreshTab(getActivity(), ConfigF.this);
                     Toast.makeText(getActivity(), getString(R.string.string2), Toast.LENGTH_LONG).show();
+                    */
                 }
             });
         }
 
-        public static void refreshTab(Activity activity,ConfigElementCustomAdapter.MyCustomRowButtonListener2 listener)
+        private static void refreshTab(Activity activity,ConfigElementCustomAdapter.MyCustomRowButtonListener2 listener1)
         {
-            Constants.session.setName(new BigInteger(32, new SecureRandom()).toString(16));
-            ((TextView)activity.findViewById(R.id.stheader)).setText(activity.getString(R.string.session)+" #"+Constants.session.getName() + " \n" + Constants.session.getDate().toLocaleString());
-            adapter = new ConfigElementCustomAdapter(activity,Constants.table,listener);
+            adapter = new ConfigElementCustomAdapter(activity,Constants.table,listener1);
             cListView.setAdapter(adapter);
             cListView.requestLayout();
         }

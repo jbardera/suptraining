@@ -210,12 +210,12 @@ public class Start extends AppCompatActivity
     static public void newSession(Activity activity)
     {
         Constants.table=new ArrayList<Element>();
-        Constants.table.add(new Element(activity.getString(R.string.element1), 1)); //"1"=code for this new element
-        Constants.listElementsData.put(1, new ElementsData(activity.getString(R.string.units), 50)); //setting "1" as code to match the element added above
-        Constants.table.add(new Element(activity.getString(R.string.element2), 2));
-        Constants.listElementsData.put(2, new ElementsData(activity.getString(R.string.units), 100));
-        Constants.table.add(new Element(activity.getString(R.string.element3), 3));
-        Constants.listElementsData.put(3, new ElementsData(activity.getString(R.string.units), 120));
+        Constants.listElementsData.put(1, new ElementsData(activity.getString(R.string.element1),activity.getString(R.string.units), 50)); //setting "1" as code
+        Constants.table.add(new Element(1)); //"1"=code of previous new element added
+        Constants.listElementsData.put(2, new ElementsData(activity.getString(R.string.element2), activity.getString(R.string.units), 100));
+        Constants.table.add(new Element(2));
+        Constants.listElementsData.put(3, new ElementsData(activity.getString(R.string.element3), activity.getString(R.string.units), 120));
+        Constants.table.add(new Element(3));
         Constants.session = new Session(activity.getString(R.string.string2), Constants.table);
         //reading custom elements
     }

@@ -1,8 +1,10 @@
+/**
+ * @author ToggleButton by zcweng @ https://github.com/zcweng/ToggleButton
+ *
+ */
+
 package com.brapeba.suptraining;
 
-/**
- * Created by joanmi on 10-Nov-15.
- */
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -21,10 +23,6 @@ import com.facebook.rebound.SpringConfig;
 import com.facebook.rebound.SpringSystem;
 import com.facebook.rebound.SpringUtil;
 
-/**
- * @author ThinkPad
- *
- */
 public class ToggleButton extends View{
     private SpringSystem springSystem;
     private Spring spring ;

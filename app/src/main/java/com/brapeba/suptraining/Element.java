@@ -7,13 +7,11 @@ import java.io.Serializable;
  */
 public class Element implements Serializable
 {
-    private String name;
     private int code;
     private int timesdone;
 
-    public Element(String s1,int c1)
+    public Element(int c1)
     {
-        this.name=s1;
         this.code=c1;
         this.timesdone=0;
     }
@@ -24,7 +22,6 @@ public class Element implements Serializable
         return this.timesdone;
     }
 
-    public String getName() { return this.name; }
     public int getCode() { return this.code; }
     public int getTimesdone() { return this.timesdone; }
 }
