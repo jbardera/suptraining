@@ -88,7 +88,7 @@ public class SessionsListF extends Fragment
                 {
                     Constants.allSessions.add(i);
                 }
-                SaveC.dumpMemToInternalStorage(Constants.allSessions, getActivity());
+                SaveSessions.dumpMemToInternalStorage(Constants.allSessions, getActivity());
                 undoDel.clear();
                 adapter = new SessionsListFCustomAdapter(getActivity(),Constants.allSessions);
                 cListView.setAdapter(adapter);
@@ -114,7 +114,7 @@ public class SessionsListF extends Fragment
                             dSize++;
                         }
                     }
-                    SaveC.dumpMemToInternalStorage(Constants.allSessions, getActivity());
+                    SaveSessions.dumpMemToInternalStorage(Constants.allSessions, getActivity());
                     refreshTab(getActivity()); // it reloads allSessions from storage
                     Snackbar.make(view, dSize+" "+getString(R.string.string4), Snackbar.LENGTH_LONG).setAction(getString(R.string.undo), mOnClickListener).show();
                 }
@@ -130,7 +130,7 @@ public class SessionsListF extends Fragment
 
     public static void refreshTab(Activity activity)
     {
-        Constants.allSessions=SaveC.readFromInternalStorage(activity);
+        Constants.allSessions= SaveSessions.readFromInternalStorage(activity);
         if (Constants.allSessions==null) { Constants.allSessions=new ArrayList<Session>(); }
         adapter = new SessionsListFCustomAdapter(activity,Constants.allSessions);
         cListView.setAdapter(adapter);

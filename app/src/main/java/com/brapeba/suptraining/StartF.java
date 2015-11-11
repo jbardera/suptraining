@@ -81,7 +81,7 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
             @Override
             public void onClick(View view)
             {
-                if (!SaveC.saveToInternalStorage(Constants.session, getActivity()))
+                if (!SaveSessions.saveToInternalStorage(Constants.session, getActivity()))
                 {
                         // returned false -> handle error
                 }

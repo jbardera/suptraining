@@ -1,9 +1,11 @@
 package com.brapeba.suptraining;
 
+import java.io.Serializable;
+
 /**
  * Created by joanmi on 07-Nov-15.
  */
-public class ElementsData
+public class ElementsData implements Serializable
 {
     private String name;
     private String unit; //units when needed, such as "meters"

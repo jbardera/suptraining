@@ -1,39 +1,42 @@
 package com.brapeba.suptraining;
 
-        import android.app.Activity;
-        import android.content.Context;
-        import android.util.Log;
+import android.app.Activity;
+import android.content.Context;
+import android.util.Log;
 
-        import java.io.FileInputStream;
-        import java.io.FileNotFoundException;
-        import java.io.FileOutputStream;
-        import java.io.IOException;
-        import java.io.ObjectInputStream;
-        import java.io.ObjectOutputStream;
-        import java.util.ArrayList;
-        import java.util.List;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by joanmi on 09-Nov-15.
  */
-public class SaveC
+public class SaveSessions
 {
     static String FILENAME = "SupSessions";
     static List<Session> allSessionsTemp;
     static FileOutputStream fos;
     static FileInputStream fin;
 
-    public SaveC()
+    public SaveSessions()
     {
     }
 
-    static public boolean saveToInternalStorage(Session mySession,Activity activity)
+    static public boolean saveToInternalStorage(Session mySession, Activity activity)
     {
         // 1st reading all previous stored counts
-        allSessionsTemp=readFromInternalStorage(activity);
+        allSessionsTemp = readFromInternalStorage(activity);
 
         // now adding the one to save
-        if (allSessionsTemp==null) { allSessionsTemp=new ArrayList<Session>(); }
+        if (allSessionsTemp == null)
+        {
+            allSessionsTemp = new ArrayList<Session>();
+        }
         allSessionsTemp.add(mySession);
 
         // and saving
@@ -45,14 +48,18 @@ public class SaveC
             of.flush();
             of.close();
             fos.close();
-        } catch (Exception e) { Log.e(Constants.TAG, e.getMessage()); return false;}
+        } catch (Exception e)
+        {
+            Log.e(Constants.TAG, e.getMessage());
+            return false;
+        }
 
         return true;
     }
 
     static public List<Session> readFromInternalStorage(Activity activity)
     {
-        List<Session> toReturn=null;
+        List<Session> toReturn = null;
         FileInputStream fis;
 
         try
@@ -74,7 +81,7 @@ public class SaveC
         return toReturn;
     }
 
-    static public boolean dumpMemToInternalStorage(List<Session> aCounts,Activity activity)
+    static public boolean dumpMemToInternalStorage(List<Session> aCounts, Activity activity)
     {
         // saving all mem to disk
         try
@@ -85,7 +92,11 @@ public class SaveC
             of.flush();
             of.close();
             fos.close();
-        } catch (Exception e) { Log.e(Constants.TAG, e.getMessage()); return false;}
+        } catch (Exception e)
+        {
+            Log.e(Constants.TAG, e.getMessage());
+            return false;
+        }
 
         return true;
     }

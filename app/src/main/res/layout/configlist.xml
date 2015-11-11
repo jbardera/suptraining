@@ -12,7 +12,7 @@
         android:paddingLeft="@dimen/buttons_margin"
         android:paddingRight="@dimen/buttons_margin"
         android:singleLine="true">
-        <EditText
+        <TextView
             android:id="@+id/lcname"
             android:layout_weight=".50"
             android:layout_width="0dp"
@@ -20,7 +20,7 @@
             android:singleLine="true"
             style="@android:style/TextAppearance.Medium"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-        <EditText
+        <TextView
             android:id="@+id/lcunits"
             android:layout_weight=".15"
             android:layout_width="0dp"
@@ -28,7 +28,7 @@
             android:singleLine="true"
             style="@android:style/TextAppearance.Medium"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-        <EditText
+        <TextView
             android:id="@+id/lcinc"
             android:layout_weight=".15"
             android:layout_width="0dp"
