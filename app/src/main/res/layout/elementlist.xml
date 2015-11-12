@@ -38,6 +38,8 @@
             style="@android:style/TextAppearance.Medium"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="\?"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
             android:singleLine="true"/>
         <Button
             android:id="@+id/badd2"
@@ -48,6 +50,8 @@
             style="@android:style/TextAppearance.Medium"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="+"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
             android:singleLine="true"/>
     </LinearLayout>
 </RelativeLayout>

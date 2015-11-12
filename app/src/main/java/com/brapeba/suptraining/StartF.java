@@ -81,6 +81,7 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
             @Override
             public void onClick(View view)
             {
+                Constants.session.setName(getString(R.string.session)+" #"+new BigInteger(32, new SecureRandom()).toString(16));
                 if (!SaveSessions.saveToInternalStorage(Constants.session, getActivity()))
                 {
                         // returned false -> handle error
@@ -89,7 +90,7 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
                 Snackbar.make(getView(), getString(R.string.saving)+" "+Constants.session.getName(), Snackbar.LENGTH_SHORT).show();
                 // once the session is saved we create a new one:
                 Start.newSession(getActivity());
-                tempTV.setText(getString(R.string.session) + " #" + Constants.session.getName() + " \n" + Constants.session.getDate().toLocaleString());
+                tempTV.setText(Constants.session.getName() + " \n" + Constants.session.getDate().toLocaleString());
                 refreshTab(getActivity(), StartF.this);
                 Toast.makeText(getActivity(), getString(R.string.string2), Toast.LENGTH_LONG).show();
             }
@@ -98,8 +99,7 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
 
     public static void refreshTab(Activity activity,ListElementCustomAdapter.MyCustomRowButtonListener listener)
     {
-        Constants.session.setName(new BigInteger(32, new SecureRandom()).toString(16));
-        ((TextView)activity.findViewById(R.id.stheader)).setText(activity.getString(R.string.session)+" #"+Constants.session.getName() + " \n" + Constants.session.getDate().toLocaleString());
+        ((TextView)activity.findViewById(R.id.stheader)).setText(Constants.session.getName() + " \n" + Constants.session.getDate().toLocaleString());
         adapter = new ListElementCustomAdapter(activity,Constants.tableSession,listener);
         cListView.setAdapter(adapter);
         cListView.requestLayout();

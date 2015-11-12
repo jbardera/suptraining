@@ -26,6 +26,7 @@
     <string name="string4">session(s) deleted...</string>
     <string name="string5">Initializing data</string>
     <string name="string6">Reading data</string>
+    <string name="string7">Add new item</string>
     <string name="string8">New values</string>
 
 </resources>

@@ -64,7 +64,7 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.start_f, container, false);
+        View rootView = inflater.inflate(R.layout.config_f, container, false);
         cListView = (ListView) rootView.findViewById(android.R.id.list);
         cListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
         return rootView;
@@ -134,7 +134,7 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
                 aldVal.show();
             }
         });
-        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab = (FloatingActionButton) view.findViewById(R.id.cfabld);
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override public void onClick(View view)
