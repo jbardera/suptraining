@@ -72,7 +72,7 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
     {
         super.onViewCreated(view, savedInstanceState);
         tempTV=(TextView)view.findViewById(R.id.stheader);
-        adapter = new ListElementCustomAdapter(getActivity(),Constants.table,this);
+        adapter = new ListElementCustomAdapter(getActivity(),Constants.tableSession,this);
         // cListView.setAdapter(adapter); // NO NEED HERE AS IT IS @OnResume via refreshTab()
         cListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -100,7 +100,7 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
     {
         Constants.session.setName(new BigInteger(32, new SecureRandom()).toString(16));
         ((TextView)activity.findViewById(R.id.stheader)).setText(activity.getString(R.string.session)+" #"+Constants.session.getName() + " \n" + Constants.session.getDate().toLocaleString());
-        adapter = new ListElementCustomAdapter(activity,Constants.table,listener);
+        adapter = new ListElementCustomAdapter(activity,Constants.tableSession,listener);
         cListView.setAdapter(adapter);
         cListView.requestLayout();
     }

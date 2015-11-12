@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Start extends AppCompatActivity
@@ -209,7 +210,8 @@ public class Start extends AppCompatActivity
 
     static public void newSession(Activity activity)
     {
-        Constants.table=new ArrayList<>();
+        Constants.tableSession=new ArrayList<>();
+        Constants.tableConfig=new ArrayList<>();
         Constants.listElementsData=SaveListElementsData.readFromInternalStorage(activity);
         //reading ElementsData from Storage
         if ((Constants.listElementsData.size()==0)||(Constants.listElementsData==null))
@@ -218,20 +220,22 @@ public class Start extends AppCompatActivity
             Toast.makeText(activity, activity.getString(R.string.string5), Toast.LENGTH_SHORT).show();
             Constants.listElementsData=new HashMap<>();
             Constants.listElementsData.put(0, new ElementsData(activity.getString(R.string.element1), activity.getString(R.string.units), 50)); //setting "1" as code
-            Constants.table.add(new Element(0)); //"1"=code of previous new element added
+            Constants.tableSession.add(new Element(0)); //"1"=code of previous new element added
             Constants.listElementsData.put(1, new ElementsData(activity.getString(R.string.element2), activity.getString(R.string.units), 100));
-            Constants.table.add(new Element(1));
+            Constants.tableSession.add(new Element(1));
             Constants.listElementsData.put(2, new ElementsData(activity.getString(R.string.element3), activity.getString(R.string.units), 120));
-            Constants.table.add(new Element(2));
+            Constants.tableSession.add(new Element(2));
+            Collections.copy(Constants.tableConfig,Constants.tableSession);
         } else
         {
             //populating table with ElementsData values:
             Toast.makeText(activity, activity.getString(R.string.string6), Toast.LENGTH_SHORT).show();
             for (int key: Constants.listElementsData.keySet())
             {
-                Constants.table.add(new Element(key));
+                Constants.tableConfig.add(new Element(key));  //adding all elements (for configuration)
+                if (Constants.listElementsData.get(key).getToShow()) Constants.tableSession.add(new Element(key)); //adding only those to show when introducing
             }
         }
-        Constants.session = new Session(activity.getString(R.string.string2), Constants.table);
+        Constants.session = new Session(activity.getString(R.string.string2), Constants.tableSession);
     }
 }

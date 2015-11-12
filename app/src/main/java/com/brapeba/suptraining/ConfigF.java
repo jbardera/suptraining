@@ -21,8 +21,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCustomRowButtonListener2
@@ -50,7 +48,11 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
         //tempElementData.setToShow(temptb1.isChecked());
         ElementsData tempElementsData = Constants.listElementsData.get(selectedItem.getCode());
         tempElementsData.setToShow(istoggled);
+        // updating the setting
         Constants.listElementsData.put(selectedItem.getCode(), tempElementsData);
+        // updating the table, to show/do not show this element accordingly
+        if (istoggled) Constants.tableSession.add(selectedItem); else Constants.tableSession.remove(selectedItem);
+        //notice we have overriden <equals> method at <Element.java> class to work <remove(selectedItem)>!!
     }
 
     @Override
@@ -72,7 +74,7 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-        adapter = new ConfigElementCustomAdapter(getActivity(), Constants.table, ConfigF.this);
+        adapter = new ConfigElementCustomAdapter(getActivity(), Constants.tableConfig, ConfigF.this);
         // cListView.setAdapter(adapter); // NO NEED HERE AS IT IS @OnResume via refreshTab()
         cListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         cListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -80,7 +82,7 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
             public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
             {
                 final int pos = position;
-                final ElementsData thisElementData = Constants.listElementsData.get(Constants.table.get(pos).getCode());
+                final ElementsData thisElementData = Constants.listElementsData.get(Constants.tableConfig.get(pos).getCode());
                 Toast.makeText(getActivity(), "Element #" + pos + "=" + thisElementData.getName(), Toast.LENGTH_SHORT).show();
                 final AlertDialog aldVal = new AlertDialog.Builder(getActivity(), R.style.AppTheme_PopupOverlay)
                         .setPositiveButton(getString(R.string.ok), null)
@@ -112,8 +114,8 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
                                 if (!qetName.getText().toString().isEmpty()) thisElementData.setName(qetName.getText().toString());
                                 if (!qetUnits.getText().toString().isEmpty()) thisElementData.setUnit(qetUnits.getText().toString());
                                 if (!qetInc.getText().toString().isEmpty()) thisElementData.setInc(Integer.valueOf(qetInc.getText().toString()));
-                                Constants.listElementsData.put(Constants.table.get(pos).getCode(), thisElementData);
-                                refreshTab(getActivity(),ConfigF.this);
+                                Constants.listElementsData.put(Constants.tableConfig.get(pos).getCode(), thisElementData);
+                                refreshTab(getActivity(), ConfigF.this);
                                 aldVal.dismiss();
                             }
                         });
@@ -144,7 +146,7 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
 
     private static void refreshTab(Activity activity, ConfigElementCustomAdapter.MyCustomRowButtonListener2 listener1)
     {
-        adapter = new ConfigElementCustomAdapter(activity, Constants.table, listener1);
+        adapter = new ConfigElementCustomAdapter(activity, Constants.tableConfig, listener1);
         cListView.setAdapter(adapter);
         cListView.requestLayout();
     }

@@ -24,4 +24,10 @@ public class Element implements Serializable
 
     public int getCode() { return this.code; }
     public int getTimesdone() { return this.timesdone; }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        return (this.code ==((Element) obj).code);
+    }
 }
