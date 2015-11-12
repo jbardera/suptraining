@@ -69,7 +69,6 @@ public class ConfigElementCustomAdapter extends BaseAdapter
             holder.name = (TextView) convertView.findViewById(R.id.lcname);
             holder.units = (TextView) convertView.findViewById(R.id.lcunits);
             holder.increment = (TextView) convertView.findViewById(R.id.lcinc);
-            holder.increment.setInputType(InputType.TYPE_CLASS_NUMBER);
             holder.tb1 = (com.brapeba.suptraining.ToggleButton) convertView.findViewById(R.id.tb1);
             convertView.setTag(holder);
         } else

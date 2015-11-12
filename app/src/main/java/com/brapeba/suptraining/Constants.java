@@ -17,7 +17,7 @@ public class Constants
     public static final String MYPREFSOR="myprefsor";
     public static Session session;
     public static List<Element> table; //all elements of session
-    public static Map<Integer,ElementsData> listElementsData=new HashMap<>(); //using Integer instead of String=R.string.<name> because of localizations change maps!
+    public static Map<Integer,ElementsData> listElementsData; //using Integer instead of String=R.string.<name> because of localizations change maps!
     public static Boolean isSaved=false;  //to know if session at Intro fragment is new or saved
     public static List<Session> allSessions; //=new ArrayList<>(); //all sessions saved
 

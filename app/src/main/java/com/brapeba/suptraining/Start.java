@@ -17,7 +17,6 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.format.Time;
 import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,8 +24,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Start extends AppCompatActivity
 {
@@ -40,8 +41,8 @@ public class Start extends AppCompatActivity
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private final int NUM_TABS=4;
-    private String[] TABS;
-    private int[] imageResId;
+    //private String[] TABS;
+    private int[] imagesTABS;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -60,14 +61,13 @@ public class Start extends AppCompatActivity
         if(savedInstanceState==null)
         {
             // ... was not rotated -> initializing vars (new Session)
-            Activity myActivity=this;
             newSession(this);
         }
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        TABS=new String[]{getString(R.string.tab1),getString(R.string.tab2),getString(R.string.tab3),getString(R.string.tab4)};
-        imageResId = new  int[] {
+        //TABS=new String[]{getString(R.string.tab1),getString(R.string.tab2),getString(R.string.tab3),getString(R.string.tab4)};
+        imagesTABS = new  int[] {
                 R.drawable.ic_create_white_36dp,
                 R.drawable.ic_storage_white_36dp,
                 R.drawable.ic_equalizer_white_36dp,
@@ -153,7 +153,7 @@ public class Start extends AppCompatActivity
         @Override
         public CharSequence getPageTitle(int position)
         {
-                Drawable image = getResources().getDrawable(imageResId[position]);
+                Drawable image = getResources().getDrawable(imagesTABS[position]);
                 image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
                 SpannableString sb = new SpannableString(" ");
                 ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
@@ -209,14 +209,29 @@ public class Start extends AppCompatActivity
 
     static public void newSession(Activity activity)
     {
-        Constants.table=new ArrayList<Element>();
-        Constants.listElementsData.put(1, new ElementsData(activity.getString(R.string.element1),activity.getString(R.string.units), 50)); //setting "1" as code
-        Constants.table.add(new Element(1)); //"1"=code of previous new element added
-        Constants.listElementsData.put(2, new ElementsData(activity.getString(R.string.element2), activity.getString(R.string.units), 100));
-        Constants.table.add(new Element(2));
-        Constants.listElementsData.put(3, new ElementsData(activity.getString(R.string.element3), activity.getString(R.string.units), 120));
-        Constants.table.add(new Element(3));
+        Constants.table=new ArrayList<>();
+        Constants.listElementsData=SaveListElementsData.readFromInternalStorage(activity);
+        //reading ElementsData from Storage
+        if ((Constants.listElementsData.size()==0)||(Constants.listElementsData==null))
+        {
+            //never used? -> initializing app
+            Toast.makeText(activity, activity.getString(R.string.string5), Toast.LENGTH_SHORT).show();
+            Constants.listElementsData=new HashMap<>();
+            Constants.listElementsData.put(0, new ElementsData(activity.getString(R.string.element1), activity.getString(R.string.units), 50)); //setting "1" as code
+            Constants.table.add(new Element(0)); //"1"=code of previous new element added
+            Constants.listElementsData.put(1, new ElementsData(activity.getString(R.string.element2), activity.getString(R.string.units), 100));
+            Constants.table.add(new Element(1));
+            Constants.listElementsData.put(2, new ElementsData(activity.getString(R.string.element3), activity.getString(R.string.units), 120));
+            Constants.table.add(new Element(2));
+        } else
+        {
+            //populating table with ElementsData values:
+            Toast.makeText(activity, activity.getString(R.string.string6), Toast.LENGTH_SHORT).show();
+            for (int key: Constants.listElementsData.keySet())
+            {
+                Constants.table.add(new Element(key));
+            }
+        }
         Constants.session = new Session(activity.getString(R.string.string2), Constants.table);
-        //reading custom elements
     }
 }

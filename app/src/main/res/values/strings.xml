@@ -12,13 +12,20 @@
     <string name="units">Units</string>
     <string name="meters">Meters</string>
     <string name="sum">SUM</string>
+    <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="undo">Undo</string>
     <string name="saving">Saving</string>
     <string name="session">Session</string>
+    <string name="name">Name</string>
+    <string name="increment">Increment</string>
     <string name="string1">Enter value</string>
     <string name="string2">NEW SESSION</string>
     <string name="string3">Session name</string>
     <string name="string4">session(s) deleted...</string>
+    <string name="string5">Initializing data</string>
+    <string name="string6">Reading data</string>
+    <string name="string8">New values</string>
+
 </resources>

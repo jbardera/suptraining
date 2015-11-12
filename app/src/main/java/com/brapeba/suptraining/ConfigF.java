@@ -5,15 +5,24 @@ package com.brapeba.suptraining;
  */
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCustomRowButtonListener2
@@ -70,18 +79,65 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
         {
             public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
             {
-                Toast.makeText(getActivity(), "Element #" + position + "=" + Constants.listElementsData.get(Constants.table.get(position).getCode()).getName(), Toast.LENGTH_SHORT).show();
-                //cListView.getCheckedItemPosition();
-                //cListView.getCheckedItemCount(); //to be 1!!
+                final int pos = position;
+                final ElementsData thisElementData = Constants.listElementsData.get(Constants.table.get(pos).getCode());
+                Toast.makeText(getActivity(), "Element #" + pos + "=" + thisElementData.getName(), Toast.LENGTH_SHORT).show();
+                final AlertDialog aldVal = new AlertDialog.Builder(getActivity(), R.style.AppTheme_PopupOverlay)
+                        .setPositiveButton(getString(R.string.ok), null)
+                        .setNegativeButton(getString(R.string.cancel), null)
+                        .setTitle(getString(R.string.string8))
+                                //.setMessage(getString(R.string.string8))
+                        .create();
+                LayoutInflater inflater = (LayoutInflater)   getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View adView = inflater.inflate(R.layout.configdialog, null);
+                final EditText qetName = (EditText) adView.findViewById(R.id.qadname);
+                final EditText qetUnits = (EditText) adView.findViewById(R.id.qadunits);
+                final EditText qetInc = (EditText) adView.findViewById(R.id.qadinc);
+                qetInc.setInputType(InputType.TYPE_CLASS_NUMBER);
+                qetName.setHint(thisElementData.getName());
+                qetUnits.setHint(thisElementData.getUnit());
+                qetInc.setHint(Integer.toString(thisElementData.getInc()));
+                aldVal.setView(adView);
+                aldVal.setOnShowListener(new DialogInterface.OnShowListener()
+                {
+                    @Override
+                    public void onShow(DialogInterface dialog)
+                    {
+                        final Button btnAccept = aldVal.getButton(AlertDialog.BUTTON_POSITIVE);
+                        btnAccept.setOnClickListener(new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                if (!qetName.getText().toString().isEmpty()) thisElementData.setName(qetName.getText().toString());
+                                if (!qetUnits.getText().toString().isEmpty()) thisElementData.setUnit(qetUnits.getText().toString());
+                                if (!qetInc.getText().toString().isEmpty()) thisElementData.setInc(Integer.valueOf(qetInc.getText().toString()));
+                                Constants.listElementsData.put(Constants.table.get(pos).getCode(), thisElementData);
+                                refreshTab(getActivity(),ConfigF.this);
+                                aldVal.dismiss();
+                            }
+                        });
+                        final Button btnDecline = aldVal.getButton(DialogInterface.BUTTON_NEGATIVE);
+                        btnDecline.setOnClickListener(new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                aldVal.dismiss();
+                            }
+                        });
+                    }
+                });
+                aldVal.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                aldVal.show();
             }
         });
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
-            @Override
-            public void onClick(View view)
+            @Override public void onClick(View view)
             {
-                  saveElementsData();
+                saveElementsData();
             }
         });
     }
@@ -96,7 +152,7 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
     private Boolean saveElementsData()
     {
         Snackbar.make(getView(), getString(R.string.saving) + "...", Snackbar.LENGTH_SHORT).show();
-        return SaveListElementsData.dumpMemToInternalStorage(Constants.listElementsData,getActivity());
+        return SaveListElementsData.dumpMemToInternalStorage(Constants.listElementsData, getActivity());
     }
 
     @Override
