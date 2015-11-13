@@ -213,10 +213,9 @@ public class Start extends AppCompatActivity
     static public void newSession(Activity activity)
     {
         Constants.tableSession=new ArrayList<>();
-        Constants.tableConfig=new ArrayList<>();
         Constants.listElementsData=SaveListElementsData.readFromInternalStorage(activity);
         //reading ElementsData from Storage
-        if ((Constants.listElementsData.size()==0)||(Constants.listElementsData==null))
+        if (Constants.listElementsData==null)
         {
             //never used? -> initializing app
             Toast.makeText(activity, activity.getString(R.string.string5), Toast.LENGTH_SHORT).show();
@@ -227,11 +226,12 @@ public class Start extends AppCompatActivity
             Constants.tableSession.add(new Element(1));
             Constants.listElementsData.put(2, new ElementsData(activity.getString(R.string.element3), activity.getString(R.string.units), 120));
             Constants.tableSession.add(new Element(2));
-            Collections.copy(Constants.tableConfig,Constants.tableSession);
+            Constants.tableConfig=new ArrayList<>(Constants.tableSession);
         } else
         {
             //populating table with ElementsData values:
-            Toast.makeText(activity, activity.getString(R.string.string6), Toast.LENGTH_SHORT).show();
+            Constants.tableConfig=new ArrayList<>();
+            //Toast.makeText(activity, activity.getString(R.string.string6), Toast.LENGTH_SHORT).show(); //don't show it because causes confusion
             for (int key: Constants.listElementsData.keySet())
             {
                 Constants.tableConfig.add(new Element(key));  //adding all elements (for configuration)

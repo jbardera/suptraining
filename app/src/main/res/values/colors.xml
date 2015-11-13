@@ -19,9 +19,9 @@
 <resources>
 
 
-    <color name="colorPrimaryDark">#2F4F4F</color>
-    <color name="colorPrimary">#228B22</color>
-    <color name="colorAccent">#32CD32</color>
+    <color name="colorPrimaryDark">#00008B</color>
+    <color name="colorPrimary">#6495ED</color>
+    <color name="colorAccent">#AFEEEE</color>
 
     <color name="white">#FFFFFF</color>
     <color name="Ivory">#FFFFF0</color>

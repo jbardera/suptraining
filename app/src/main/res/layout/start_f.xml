@@ -20,7 +20,7 @@
             android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:dividerHeight="1dp"
+            android:dividerHeight="0dp"
             android:drawSelectorOnTop="false" />
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton

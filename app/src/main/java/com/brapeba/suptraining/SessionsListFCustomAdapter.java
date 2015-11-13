@@ -42,16 +42,16 @@ public class SessionsListFCustomAdapter extends BaseAdapter
         {
             convertView = mInflater.inflate(R.layout.sessionslist, null);
             holder = new ViewHolder();
-            holder.name = (TextView) convertView.findViewById(R.id.lname);
             holder.date = (TextView) convertView.findViewById(R.id.ldate);
+            holder.name = (TextView) convertView.findViewById(R.id.lname);
             convertView.setTag(holder);
         } else
         {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.name.setText(getItem(position).getName());
         holder.date.setText(getItem(position).getDate().toLocaleString());
+        holder.name.setText((getItem(position).getName()).split("#")[1]);
 
         return convertView;
     }

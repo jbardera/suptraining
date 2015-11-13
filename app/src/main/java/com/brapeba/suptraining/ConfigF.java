@@ -139,6 +139,7 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
         {
             @Override public void onClick(View view)
             {
+                Snackbar.make(getView(), getString(R.string.saving) + "...", Snackbar.LENGTH_SHORT).show();
                 saveElementsData();
             }
         });
@@ -153,7 +154,6 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
 
     private Boolean saveElementsData()
     {
-        Snackbar.make(getView(), getString(R.string.saving) + "...", Snackbar.LENGTH_SHORT).show();
         return SaveListElementsData.dumpMemToInternalStorage(Constants.listElementsData, getActivity());
     }
 
