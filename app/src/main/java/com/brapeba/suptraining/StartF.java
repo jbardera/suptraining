@@ -50,6 +50,7 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
     {
         //listener of custom adapter->to process updates!
         selectedItem.sumTimes(increment);
+        tempTV.setText(getString(R.string.string9) + " \n" + Constants.session.getDate().toLocaleString());
     }
 
     @Override public void onCreate(Bundle savedInstanceState)
@@ -87,12 +88,12 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
                         // returned false -> handle error
                 }
                 SessionsListF.refreshTab(getActivity());
-                Snackbar.make(getView(), getString(R.string.saving)+" "+Constants.session.getName(), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(getView(), getString(R.string.saving)+" "+Constants.session.getName(), Snackbar.LENGTH_LONG).show();
                 // once the session is saved we create a new one:
                 Start.newSession(getActivity());
                 tempTV.setText(Constants.session.getName() + " \n" + Constants.session.getDate().toLocaleString());
                 refreshTab(getActivity(), StartF.this);
-                Toast.makeText(getActivity(), getString(R.string.string2), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), getString(R.string.string2), Toast.LENGTH_LONG).show();
             }
         });
     }

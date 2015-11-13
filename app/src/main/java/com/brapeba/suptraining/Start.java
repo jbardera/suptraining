@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -220,12 +221,14 @@ public class Start extends AppCompatActivity
             //never used? -> initializing app
             Toast.makeText(activity, activity.getString(R.string.string5), Toast.LENGTH_SHORT).show();
             Constants.listElementsData=new HashMap<>();
-            Constants.listElementsData.put(0, new ElementsData(activity.getString(R.string.element1), activity.getString(R.string.units), 50)); //setting "1" as code
-            Constants.tableSession.add(new Element(0)); //"1"=code of previous new element added
-            Constants.listElementsData.put(1, new ElementsData(activity.getString(R.string.element2), activity.getString(R.string.units), 100));
-            Constants.tableSession.add(new Element(1));
-            Constants.listElementsData.put(2, new ElementsData(activity.getString(R.string.element3), activity.getString(R.string.units), 120));
-            Constants.tableSession.add(new Element(2));
+
+            for (int i=0;i<3;i++)
+            {
+                String uri = activity.getResources().getString(R.string.elementtoken)+i;
+                int stringResource = activity.getResources().getIdentifier(uri,"string", activity.getPackageName());
+                Constants.listElementsData.put(i, new ElementsData(activity.getString(stringResource), activity.getString(R.string.units), 50)); //setting "i" as code
+                Constants.tableSession.add(new Element(i)); //"i"=code of previous new element added
+            }
             Constants.tableConfig=new ArrayList<>(Constants.tableSession);
         } else
         {

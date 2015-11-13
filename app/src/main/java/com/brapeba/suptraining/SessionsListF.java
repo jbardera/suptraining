@@ -1,17 +1,25 @@
 package com.brapeba.suptraining;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +68,7 @@ public class SessionsListF extends Fragment
         cListView = (ListView) rootView.findViewById(android.R.id.list);
         cListView.setSelector(R.drawable.activatedbackground);
         cListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        cListView.setItemsCanFocus(false);
+        //cListView.setItemsCanFocus(false);
         cListView.setVerticalScrollBarEnabled(true);
         linL = (LinearLayout) rootView.findViewById(R.id.lltop);
         return rootView;
@@ -73,8 +81,51 @@ public class SessionsListF extends Fragment
         cListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
             {
+            }
+        });
+
+        cListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position, long arg3)
+            {
+                final int pos = position;
+                final Session thisSession = Constants.allSessions.get(pos);
+                final AlertDialog sesVal = new AlertDialog.Builder(getActivity(), R.style.AppTheme_PopupOverlay)
+                        .setPositiveButton(getString(R.string.ok), null)
+                                //.setNegativeButton(getString(R.string.cancel), null)
+                        .setTitle(thisSession.getName() + "\n" + thisSession.getDate().toLocaleString())
+                                //.setMessage(getString(R.string.string8))
+                        .create();
+                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final TextView textV = new TextView(getActivity());
+                for (int i = 0; i < thisSession.getElements().size(); i++)
+                {
+                    textV.append(" "+String.format("%04d",thisSession.getElements().get(i).getTimesdone()) + " "
+                            + Constants.listElementsData.get(thisSession.getElements().get(i).getCode()).getName()+"\n");
+                }
+                sesVal.setView(textV);
+                sesVal.setOnShowListener(new DialogInterface.OnShowListener()
+                {
+                    @Override
+                    public void onShow(DialogInterface dialog)
+                    {
+                        final Button btnAccept = sesVal.getButton(AlertDialog.BUTTON_POSITIVE);
+                        btnAccept.setOnClickListener(new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                sesVal.dismiss();
+                            }
+                        });
+                    }
+                });
+                sesVal.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                sesVal.show();
+                return true;
             }
         });
 

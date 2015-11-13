@@ -1,14 +1,16 @@
 <resources>
     <string name="app_name" translatable="false">Suptraining</string>
     <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="section_format" translatable="false">Hello World from section: %1$d</string>
+    <string name="elementtoken" translatable="false">element</string>
     <string name="tab1">Intro</string>
     <string name="tab2">Sessions</string>
     <string name="tab3">Stats</string>
     <string name="tab4">Config</string>
-    <string name="element1">Flexiones</string>
-    <string name="element2">Abdominales</string>
-    <string name="element3">Sentadillas</string>
+    <string name="element0">Push-ups</string>
+    <string name="element1">Abdominals</string>
+    <string name="element2">Sit-ups/Squats</string>
+    <string name="element3">Pull-ups/Chin-ups</string>
     <string name="units">Units</string>
     <string name="meters">Meters</string>
     <string name="sum">SUM</string>
@@ -28,5 +30,5 @@
     <string name="string6">Reading data</string>
     <string name="string7">Add new item</string>
     <string name="string8">New values</string>
-
+    <string name="string9">SESSION NOT SAVED</string>
 </resources>
