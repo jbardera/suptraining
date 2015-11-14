@@ -20,14 +20,15 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCustomRowButtonListener2
 {
     private static ListView cListView;
     private static ConfigElementCustomAdapter adapter;
     public FloatingActionButton fab;
+    private ImageButton addButton;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -83,14 +84,14 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
             {
                 final int pos = position;
                 final ElementsData thisElementData = Constants.listElementsData.get(Constants.tableConfig.get(pos).getCode());
-                Toast.makeText(getActivity(), "Element #" + pos + "=" + thisElementData.getName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Element #" + pos + "=" + thisElementData.getName(), Toast.LENGTH_SHORT).show();
                 final AlertDialog aldVal = new AlertDialog.Builder(getActivity(), R.style.AppTheme_PopupOverlay)
                         .setPositiveButton(getString(R.string.ok), null)
                         .setNegativeButton(getString(R.string.cancel), null)
                         .setTitle(getString(R.string.string8))
                                 //.setMessage(getString(R.string.string8))
                         .create();
-                LayoutInflater inflater = (LayoutInflater)   getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View adView = inflater.inflate(R.layout.configdialog, null);
                 final EditText qetName = (EditText) adView.findViewById(R.id.qadname);
                 final EditText qetUnits = (EditText) adView.findViewById(R.id.qadunits);
@@ -111,9 +112,12 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
                             @Override
                             public void onClick(View v)
                             {
-                                if (!qetName.getText().toString().isEmpty()) thisElementData.setName(qetName.getText().toString());
-                                if (!qetUnits.getText().toString().isEmpty()) thisElementData.setUnit(qetUnits.getText().toString());
-                                if (!qetInc.getText().toString().isEmpty()) thisElementData.setInc(Integer.valueOf(qetInc.getText().toString()));
+                                if (!qetName.getText().toString().isEmpty())
+                                    thisElementData.setName(qetName.getText().toString());
+                                if (!qetUnits.getText().toString().isEmpty())
+                                    thisElementData.setUnit(qetUnits.getText().toString());
+                                if (!qetInc.getText().toString().isEmpty())
+                                    thisElementData.setInc(Integer.valueOf(qetInc.getText().toString()));
                                 Constants.listElementsData.put(Constants.tableConfig.get(pos).getCode(), thisElementData);
                                 refreshTab(getActivity(), ConfigF.this);
                                 aldVal.dismiss();
@@ -141,6 +145,67 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
             {
                 Snackbar.make(getView(), getString(R.string.saving) + "...", Snackbar.LENGTH_SHORT).show();
                 saveElementsData();
+            }
+        });
+        addButton=(ImageButton)view.findViewById(R.id.baddni);
+        addButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override public void onClick(View view)
+            {
+                final AlertDialog aldVal = new AlertDialog.Builder(getActivity(), R.style.AppTheme_PopupOverlay)
+                        .setPositiveButton(getString(R.string.ok), null)
+                        .setNegativeButton(getString(R.string.cancel), null)
+                        .setTitle(getString(R.string.string7))
+                                //.setMessage(getString(R.string.string8))
+                        .create();
+                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View adView = inflater.inflate(R.layout.configdialog, null);
+                final EditText qetName = (EditText) adView.findViewById(R.id.qadname);
+                final EditText qetUnits = (EditText) adView.findViewById(R.id.qadunits);
+                final EditText qetInc = (EditText) adView.findViewById(R.id.qadinc);
+                qetInc.setInputType(InputType.TYPE_CLASS_NUMBER);
+                qetName.setHint(getString(R.string.string10));
+                qetUnits.setHint(getString(R.string.units));
+                qetInc.setHint("100");
+                aldVal.setView(adView);
+                aldVal.setOnShowListener(new DialogInterface.OnShowListener()
+                {
+                    @Override
+                    public void onShow(DialogInterface dialog)
+                    {
+                        final Button btnAccept = aldVal.getButton(AlertDialog.BUTTON_POSITIVE);
+                        btnAccept.setOnClickListener(new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                String newEName=qetName.getText().toString();
+                                String newEUnits=qetUnits.getText().toString();
+                                String newEInc=qetInc.getText().toString();
+                                if (newEName.isEmpty()) newEName=getString(R.string.string10);
+                                if (newEUnits.isEmpty()) newEUnits=getString(R.string.units);
+                                if (newEInc.isEmpty()) newEInc="100";
+                                ElementsData newElementsData=new ElementsData(newEName,newEUnits,Integer.valueOf(newEInc));
+                                Constants.tableConfig.add(new Element(Constants.listElementsData.size()));  //adding new code=Constants.listElementsData.size() to listview
+                                Constants.listElementsData.put(Constants.listElementsData.size(), newElementsData); //adding the elementdata to the list (stored)
+                                adapter.notifyDataSetChanged();
+                                refreshTab(getActivity(), ConfigF.this);
+                                aldVal.dismiss();
+                            }
+                        });
+                        final Button btnDecline = aldVal.getButton(DialogInterface.BUTTON_NEGATIVE);
+                        btnDecline.setOnClickListener(new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                aldVal.dismiss();
+                            }
+                        });
+                    }
+                });
+                aldVal.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                aldVal.show();
             }
         });
     }

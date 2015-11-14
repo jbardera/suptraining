@@ -12,6 +12,7 @@ import java.util.Map;
  */
 public class Constants
 {
+    public static final int INITNUMELEMENTS=4; // on strings.xml from element0 to element(INITNUMELEMENTS-1)
     public static final String TAG="SUPTRAINING";
     public static final String ARG_SECTION_NUMBER = "section_number";
     public static final String MYPREFSOR="myprefsor";

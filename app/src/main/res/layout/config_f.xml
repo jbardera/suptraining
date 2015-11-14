@@ -4,10 +4,57 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:context=".Main$PlaceholderFragment">
-
+    <LinearLayout
+        android:id="@+id/cfgheader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/listlines_margin"
+        android:paddingRight="@dimen/listlines_margin"
+        android:singleLine="true">
+        <TextView
+            android:id="@+id/hct1"
+            android:layout_weight=".50"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/name"
+            style="@android:style/TextAppearance.Medium"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/hct2"
+            android:layout_weight=".17"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/units"
+            style="@android:style/TextAppearance.Medium"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/hct3"
+            android:layout_weight=".13"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/incrementshort"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:paddingRight="@dimen/listlines_margin"
+            style="@android:style/TextAppearance.Medium"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/hct4"
+            android:layout_width="54dp"
+            android:layout_height="30dp"
+            android:text="@string/showonoff"
+            style="@android:style/TextAppearance.Medium"
+            android:textAppearance="?android:attr/textAppearanceMedium" >
+        </TextView>
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/cftop"
         android:paddingTop="@dimen/buttons_margin"
+        android:layout_below="@+id/cfgheader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

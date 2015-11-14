@@ -22,7 +22,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
         <TextView
             android:id="@+id/lcunits"
-            android:layout_weight=".15"
+            android:layout_weight=".17"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -30,10 +30,13 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
         <TextView
             android:id="@+id/lcinc"
-            android:layout_weight=".15"
+            android:layout_weight=".13"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:singleLine="true"
+            android:gravity="end"
+            android:textAlignment="textEnd"
+            android:paddingRight="@dimen/listlines_margin"
             style="@android:style/TextAppearance.Medium"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 

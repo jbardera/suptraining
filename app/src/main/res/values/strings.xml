@@ -22,6 +22,8 @@
     <string name="session">Session</string>
     <string name="name">Name</string>
     <string name="increment">Increment</string>
+    <string name="incrementshort">Inc</string>
+    <string name="showonoff">Show</string>
     <string name="string1">Enter value</string>
     <string name="string2">NEW SESSION</string>
     <string name="string3">Session name</string>
@@ -31,4 +33,5 @@
     <string name="string7">Add new item</string>
     <string name="string8">New values</string>
     <string name="string9">SESSION NOT SAVED</string>
+    <string name="string10">Name of new item</string>
 </resources>

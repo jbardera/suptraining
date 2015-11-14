@@ -222,7 +222,7 @@ public class Start extends AppCompatActivity
             Toast.makeText(activity, activity.getString(R.string.string5), Toast.LENGTH_SHORT).show();
             Constants.listElementsData=new HashMap<>();
 
-            for (int i=0;i<3;i++)
+            for (int i=0;i<Constants.INITNUMELEMENTS;i++)
             {
                 String uri = activity.getResources().getString(R.string.elementtoken)+i;
                 int stringResource = activity.getResources().getIdentifier(uri,"string", activity.getPackageName());
