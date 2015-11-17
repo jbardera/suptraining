@@ -19,6 +19,14 @@ public class ElementsData implements Serializable
         this.inc=i1;
     }
 
+    public ElementsData(String s1,String s2,int i1,Boolean t1)
+    {
+        this.name=s1;
+        this.unit=s2;
+        this.inc=i1;
+        this.toShow=t1;
+    }
+
     public void setName(String s1) { this.name=s1; }
     public void setInc(int i1) { this.inc=i1; }
     public void setUnit(String s2) { this.unit=s2; }

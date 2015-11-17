@@ -32,6 +32,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Start extends AppCompatActivity
 {
@@ -222,14 +223,29 @@ public class Start extends AppCompatActivity
             Toast.makeText(activity, activity.getString(R.string.string5), Toast.LENGTH_SHORT).show();
             Constants.listElementsData=new HashMap<>();
 
-            for (int i=0;i<Constants.INITNUMELEMENTS;i++)
+            //first adding running and swimming that have diferent units
+            Constants.listElementsData.put(0, new ElementsData(activity.getString(R.string.element0), activity.getString(R.string.pools), 30)); //adding swimming
+            Constants.tableSession.add(new Element(0)); //"i"=code of previous new element added
+            Constants.listElementsData.put(1, new ElementsData(activity.getString(R.string.element1), activity.getString(R.string.kms), 5)); //adding running
+            Constants.tableSession.add(new Element(1)); //"i"=code of previous new element added
+            //now adding all the other elements
+            for (int i=2;i<Constants.INITNUMELEMENTS;i++)
             {
                 String uri = activity.getResources().getString(R.string.elementtoken)+i;
                 int stringResource = activity.getResources().getIdentifier(uri,"string", activity.getPackageName());
-                Constants.listElementsData.put(i, new ElementsData(activity.getString(stringResource), activity.getString(R.string.units), 50)); //setting "i" as code
+                if (i<12) Constants.listElementsData.put(i, new ElementsData(activity.getString(stringResource), activity.getString(R.string.units), 50)); //setting "i" as code
+                    else  Constants.listElementsData.put(i, new ElementsData(activity.getString(stringResource), activity.getString(R.string.units), 50,false));
                 Constants.tableSession.add(new Element(i)); //"i"=code of previous new element added
             }
+            //syncronizing table stored with to show at listview:
             Constants.tableConfig=new ArrayList<>(Constants.tableSession);
+            //now we have to delete those that toShow=false
+            Iterator<Element> i = Constants.tableSession.iterator();
+            while (i.hasNext())
+            {
+                Element s = i.next();
+                if (!Constants.listElementsData.get(s.getCode()).getToShow()) i.remove();
+            }
         } else
         {
             //populating table with ElementsData values:
