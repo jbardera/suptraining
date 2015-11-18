@@ -18,7 +18,6 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,11 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -137,9 +132,9 @@ public class Start extends AppCompatActivity
                     return StartF.init(position);
                 case 1: // Fragment #1
                     return SessionsListF.init(position);
-                //return SavedF.init(position);
                 case 2: // Fragment #2
-                    return PlaceholderFragment.newInstance(position + 1);
+                    return StatsF.init(position);
+                    //return PlaceholderFragment.newInstance(position + 1);
                 case 3:
                     return ConfigF.init(position);
                 default: // should never happen!
@@ -214,7 +209,7 @@ public class Start extends AppCompatActivity
 
     static public void newSession(Activity activity)
     {
-        Constants.tableSession=new ArrayList<>();
+        Constants.tableConfig=new ArrayList<>();
         Constants.listElementsData=SaveListElementsData.readFromInternalStorage(activity);
         //reading ElementsData from Storage
         if (Constants.listElementsData==null)
@@ -224,32 +219,34 @@ public class Start extends AppCompatActivity
             Constants.listElementsData=new HashMap<>();
 
             //first adding running and swimming that have diferent units
-            Constants.listElementsData.put(0, new ElementsData(activity.getString(R.string.element0), activity.getString(R.string.pools), 30)); //adding swimming
-            Constants.tableSession.add(new Element(0)); //"i"=code of previous new element added
-            Constants.listElementsData.put(1, new ElementsData(activity.getString(R.string.element1), activity.getString(R.string.kms), 5)); //adding running
-            Constants.tableSession.add(new Element(1)); //"i"=code of previous new element added
+            Constants.listElementsData.put(0, new ElementsData(activity.getString(R.string.element0), activity.getString(R.string.kms), 5)); //adding swimming
+            Constants.tableConfig.add(new Element(0)); //"i"=code of previous new element added
+            Constants.listElementsData.put(1, new ElementsData(activity.getString(R.string.element1), activity.getString(R.string.pools), 30)); //adding running
+            Constants.tableConfig.add(new Element(1)); //"i"=code of previous new element added
+            Constants.listElementsData.put(2, new ElementsData(activity.getString(R.string.element2), activity.getString(R.string.kms), 5)); //adding running
+            Constants.tableConfig.add(new Element(2)); //"i"=code of previous new element added
             //now adding all the other elements
-            for (int i=2;i<Constants.INITNUMELEMENTS;i++)
+            for (int i=3;i<Constants.INITNUMELEMENTS;i++)
             {
                 String uri = activity.getResources().getString(R.string.elementtoken)+i;
                 int stringResource = activity.getResources().getIdentifier(uri,"string", activity.getPackageName());
                 if (i<12) Constants.listElementsData.put(i, new ElementsData(activity.getString(stringResource), activity.getString(R.string.units), 50)); //setting "i" as code
                     else  Constants.listElementsData.put(i, new ElementsData(activity.getString(stringResource), activity.getString(R.string.units), 50,false));
-                Constants.tableSession.add(new Element(i)); //"i"=code of previous new element added
+                Constants.tableConfig.add(new Element(i)); //"i"=code of previous new element added
             }
             //syncronizing table stored with to show at listview:
-            Constants.tableConfig=new ArrayList<>(Constants.tableSession);
-            //now we have to delete those that toShow=false
-            Iterator<Element> i = Constants.tableSession.iterator();
-            while (i.hasNext())
+            Constants.tableSession=new ArrayList<>(Constants.tableConfig);
+            //now we have to delete at tableSession those that toShow=false
+            Iterator<Element> itelem = Constants.tableSession.iterator();
+            while (itelem.hasNext())
             {
-                Element s = i.next();
-                if (!Constants.listElementsData.get(s.getCode()).getToShow()) i.remove();
+                Element s = itelem.next();
+                if (!Constants.listElementsData.get(s.getCode()).getToShow()) itelem.remove();
             }
         } else
         {
             //populating table with ElementsData values:
-            Constants.tableConfig=new ArrayList<>();
+            Constants.tableSession=new ArrayList<>();
             //Toast.makeText(activity, activity.getString(R.string.string6), Toast.LENGTH_SHORT).show(); //don't show it because causes confusion
             for (int key: Constants.listElementsData.keySet())
             {

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="element0">Flexiones</string>
-    <string name="element1">Abdominales</string>
-    <string name="element2">Sentadillas</string>
-    <string name="element3">Dominadas</string>
     <string name="pools">Piscinas</string>
     <string name="kms">Kms</string>
     <string name="incrementshort">Inc</string>
@@ -19,28 +15,40 @@
     <string name="string2">NUEVA SESIÓN</string>
     <string name="string3">Nombre de sesión</string>
     <string name="string4">sesiones borradas</string>
-    <string name="string5"></string>
+    <string name="string5">Preparando datos</string>
     <string name="string9">SESIÓN NO GUARDADA</string>
     <string name="tab2">Sesiones</string>
     <string name="units">Uds.</string>
     <string name="undo">Deshacer</string>
-    <string name="element4">Nadar</string>
-    <string name="element5">Correr</string>
-    <string name="elementtoken" translatable="false"></string>
+    <string name="element0">Stand-Up Paddle</string>
+    <string name="element1">Natación</string>
+    <string name="element2">Correr</string>
+    <string name="element3">Flexiones</string>
+    <string name="element4">Abdominales</string>
+    <string name="element5">Sentadillas</string>
+    <string name="element6">Dominadas</string>
     <string name="element10">Contracción pierna sentado</string>
-    <string name="element11">Abdominales</string>
-    <string name="element12">Extensión de espalda</string>
-    <string name="element13">Press de pecho</string>
-    <string name="element14">Mariposa</string>
-    <string name="element15">Glúteos</string>
-    <string name="element16">Aducción de caderas</string>
-    <string name="element17">Abducción de caderas</string>
-    <string name="element18">Estirar abajo</string>
-    <string name="element19">Elevación lateral</string>
-    <string name="element20">Remo/deltoides posterior</string>
-    <string name="element6">Extensión de pierna</string>
+    <string name="element11">Extensión de espalda</string>
+    <string name="element12">Press de pecho</string>
+    <string name="element13">Mariposa</string>
+    <string name="element14">Glúteos</string>
+    <string name="element15">Aducción de caderas</string>
+    <string name="element16">Abducción de caderas</string>
+    <string name="element17">Estirar abajo</string>
+    <string name="element18">Elevación lateral</string>
+    <string name="element19">Remo/deltoides posterior</string>
+    <string name="element20">Extensión de pierna</string>
     <string name="element7">Press de pierna sentado</string>
     <string name="element8">Extensión de pantorrilla</string>
     <string name="element9">Contracción de pierna</string>
-    <string name="increment">incremento</string>
+    <string name="increment">Incremento</string>
+    <string name="cancel">Cancelar</string>
+    <string name="action_settings">Configuración</string>
+    <string name="string6">Leyendo datos</string>
+    <string name="string7">Añadir nuevo</string>
+    <string name="string8">Nuevos valores</string>
+    <string name="sum">SUM</string>
+    <string name="tab1">Intro</string>
+    <string name="tab3">Stats</string>
+    <string name="tab4">Config</string>
 </resources>

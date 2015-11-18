@@ -16,8 +16,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.math.BigInteger;
 import java.security.SecureRandom;
 

@@ -63,7 +63,7 @@ public class SessionsListFCustomAdapter extends BaseAdapter
 
     public Session getItem(int position)
     {
-        return data.get(getCount() - position - 1); //instead of return data.get(getCount()); to show items in reverse order!
+        return data.get(position);
     }
     public long getItemId(int position)
     {

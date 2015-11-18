@@ -91,7 +91,7 @@ public class SessionsListF extends Fragment
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position, long arg3)
             {
-                final int pos = position;
+                final int pos = cListView.getCount() - position - 1; //for reverse order
                 final Session thisSession = Constants.allSessions.get(pos);
                 final AlertDialog sesVal = new AlertDialog.Builder(getActivity(), R.style.AppTheme_PopupOverlay)
                         .setPositiveButton(getString(R.string.ok), null)
