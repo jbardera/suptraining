@@ -98,29 +98,21 @@ public class StatsF extends Fragment
         for (int i = 0; i < Constants.allSessions.size(); i++)
         {
             List<Element> tempListElements = Constants.allSessions.get(i).getElements();
-            if (elementCode>tempListElements.size())
+            Boolean found = false;
+            for (int j = 0; j < tempListElements.size(); j++)
             {
-                //means there is not this element code in this session -> set to 0!
+                if (tempListElements.get(j).getCode() == elementCode)
+                {
+                    Entry v1e1 = new Entry(tempListElements.get(j).getTimesdone(), i);
+                    valueSet1.add(v1e1);
+                    found = true;
+                    j = tempListElements.size(); //to end the loop
+                }
+            }
+            if (!found)
+            {
                 Entry v1e1 = new Entry(0, i);
                 valueSet1.add(v1e1);
-            } else
-            {
-                Boolean found=false;
-                for (int j=0;j<tempListElements.size();j++)
-                {
-                    if (tempListElements.get(j).getCode()==elementCode)
-                    {
-                        Entry v1e1 = new Entry(tempListElements.get(j).getTimesdone(), i);
-                        valueSet1.add(v1e1);
-                        found=true;
-                        j=tempListElements.size(); //to end the loop
-                    }
-                }
-                if (!found)
-                {
-                    Entry v1e1 = new Entry(0, i);
-                    valueSet1.add(v1e1);
-                }
             }
         }
         LineDataSet lineDataSet1 = new LineDataSet(valueSet1, Constants.listElementsData.get(elementCode).getName());

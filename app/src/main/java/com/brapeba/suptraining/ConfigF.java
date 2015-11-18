@@ -68,6 +68,8 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
         View rootView = inflater.inflate(R.layout.config_f, container, false);
         cListView = (ListView) rootView.findViewById(android.R.id.list);
         cListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
+        View footerView = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.config_f_lvfooter, null, false);
+        cListView.addFooterView(footerView);
         return rootView;
     }
 
