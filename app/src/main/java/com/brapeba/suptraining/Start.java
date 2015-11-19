@@ -6,8 +6,11 @@ licensed under CC-BY see http://creativecommons.org/licenses/by/4.0/
 package com.brapeba.suptraining;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
@@ -23,6 +26,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -100,8 +105,16 @@ public class Start extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
+        if (id == R.id.action_about)
         {
+            AlertDialog abD = new AlertDialog.Builder(this, R.style.AppTheme_PopupOverlay)
+                .setPositiveButton(getString(R.string.ok), null)
+                        //.setNegativeButton(getString(R.string.cancel), null)
+                .setTitle(getString(R.string.app_name))
+                .setMessage(getString(R.string.text_about))
+                .create();
+            abD.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            abD.show();
             return true;
         }
 
