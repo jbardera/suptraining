@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/listlines_margin"
-        android:paddingRight="@dimen/listlines_margin">
+        android:paddingRight="@dimen/listlines_margin"
+        android:descendantFocusability="blocksDescendants"> <!-- needed to make the listview clickable as it has buttons -->
         <TextView
             android:id="@+id/lclicks"
             android:layout_weight=".14"

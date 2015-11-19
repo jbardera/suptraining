@@ -6,13 +6,19 @@
 package com.brapeba.suptraining;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -62,7 +68,8 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
         View rootView = inflater.inflate(R.layout.start_f, container, false);
         cListView = (ListView) rootView.findViewById(android.R.id.list);
         linL = (LinearLayout) rootView.findViewById(R.id.lltop);
-        cListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
+        cListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        cListView.setVerticalScrollBarEnabled(true);
         return rootView;
     }
 
@@ -71,9 +78,19 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
     {
         super.onViewCreated(view, savedInstanceState);
         tempTV=(TextView)view.findViewById(R.id.stheader);
-        adapter = new ListElementCustomAdapter(getActivity(),Constants.tableSession,this);
+        // adapter = new ListElementCustomAdapter(getActivity(),Constants.tableSession,this);
         // cListView.setAdapter(adapter); // NO NEED HERE AS IT IS @OnResume via refreshTab()
-        cListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
+        cListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position, long arg3)
+            {
+                final int pos = position;
+                Constants.tableSession.get(pos).sumTimes(-Constants.tableSession.get(pos).getTimesdone()); //zeroing the item!
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
