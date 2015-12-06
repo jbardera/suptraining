@@ -78,8 +78,9 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
     {
         super.onViewCreated(view, savedInstanceState);
         tempTV=(TextView)view.findViewById(R.id.stheader);
+        refreshTab(getActivity(), StartF.this);
         // adapter = new ListElementCustomAdapter(getActivity(),Constants.tableSession,this);
-        // cListView.setAdapter(adapter); // NO NEED HERE AS IT IS @OnResume via refreshTab()
+        // cListView.setAdapter(adapter); // NO NEED HERE AS IT IS  via refreshTab()
         cListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
         {
             @Override
@@ -124,6 +125,5 @@ public class StartF extends Fragment implements ListElementCustomAdapter.MyCusto
     @Override public void onResume()
     {
         super.onResume();
-        refreshTab(getActivity(), StartF.this);
     }
 }

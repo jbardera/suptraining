@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -27,7 +26,6 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
 {
     private static ListView cListView;
     private static ConfigElementCustomAdapter adapter;
-    public FloatingActionButton fab;
     private ImageButton addButton;
 
     /**
@@ -54,6 +52,7 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
         // updating the table, to show/do not show this element accordingly
         if (istoggled) Constants.tableSession.add(selectedItem); else Constants.tableSession.remove(selectedItem);
         //notice we have overriden <equals> method at <Element.java> class to work <remove(selectedItem)>!!
+        saveElementsData();
     }
 
     @Override
@@ -121,6 +120,8 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
                                 if (!qetInc.getText().toString().isEmpty())
                                     thisElementData.setInc(Integer.valueOf(qetInc.getText().toString()));
                                 Constants.listElementsData.put(Constants.tableConfig.get(pos).getCode(), thisElementData);
+                                Snackbar.make(getView(), getString(R.string.saving) + "...", Snackbar.LENGTH_SHORT).show();
+                                saveElementsData();
                                 refreshTab(getActivity(), ConfigF.this);
                                 aldVal.dismiss();
                             }
@@ -138,15 +139,6 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
                 });
                 aldVal.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
                 aldVal.show();
-            }
-        });
-        fab = (FloatingActionButton) view.findViewById(R.id.cfabld);
-        fab.setOnClickListener(new View.OnClickListener()
-        {
-            @Override public void onClick(View view)
-            {
-                Snackbar.make(getView(), getString(R.string.saving) + "...", Snackbar.LENGTH_SHORT).show();
-                saveElementsData();
             }
         });
         addButton=(ImageButton)view.findViewById(R.id.baddni);
@@ -190,7 +182,8 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
                                 ElementsData newElementsData=new ElementsData(newEName,newEUnits,Integer.valueOf(newEInc));
                                 Constants.tableConfig.add(new Element(Constants.listElementsData.size()));  //adding new code=Constants.listElementsData.size() to listview
                                 Constants.listElementsData.put(Constants.listElementsData.size(), newElementsData); //adding the elementdata to the list (stored)
-                                adapter.notifyDataSetChanged();
+                                Snackbar.make(getView(), getString(R.string.saving) + "...", Snackbar.LENGTH_SHORT).show();
+                                saveElementsData();
                                 refreshTab(getActivity(), ConfigF.this);
                                 aldVal.dismiss();
                             }
@@ -221,7 +214,9 @@ public class ConfigF extends Fragment implements ConfigElementCustomAdapter.MyCu
 
     private Boolean saveElementsData()
     {
-        return SaveListElementsData.dumpMemToInternalStorage(Constants.listElementsData, getActivity());
+        Boolean success=SaveListElementsData.dumpMemToInternalStorage(Constants.listElementsData, getActivity());
+        Start.newSession(getActivity());  // to refresh tab 1 (intro)
+        return success;
     }
 
     @Override
